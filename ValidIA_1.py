@@ -185,3 +185,4 @@ def iniciar_sistema():
 # Ponto de entrada do script
 if __name__ == "__main__":
     iniciar_sistema()
+    gabi
