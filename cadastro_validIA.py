@@ -21,3 +21,5 @@ def criar_cadastro(cadastros):
     }
     cadastros.append(novo_usuario)
     print(f"\n[SUCESSO] Usuário '{usuario}' cadastrado com sucesso!")
+    oiii
+    
