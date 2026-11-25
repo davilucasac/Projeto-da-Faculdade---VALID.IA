@@ -88,39 +88,40 @@ def ler_historico(lista_dados):
 # ---------------------------------------------------------
 # 3. UPDATE (Atualizar pergunta ou tema)
 # ---------------------------------------------------------
-def atualizar_pergunta(lista_dados):
-    """Busca um registro pelo ID e permite corrigir o texto ou o tema."""
-    print("\n--- ATUALIZAR PERGUNTA ---")
-    # Reutiliza a função de leitura; se estiver vazia, encerra a função
-    if not ler_historico(lista_dados):
+def atualizar_cadastro(cadastros):
+    """Função para atualizar um cadastro existente (UPDATE)"""
+    print("\n--- ATUALIZAR CADASTRO ---")
+    if not cadastros:
+        print("Nenhum cadastro disponível para atualizar.")
         return
-
-    try:
-        id_busca = int(input("Digite o ID da pergunta que deseja corrigir: "))
         
-        for item in lista_dados:
-            if item["id"] == id_busca:
-                print(f"\nEditando ID #{id_busca}: '{item['pergunta']}'")
+    cpf_busca = input("Digite o CPF do usuário que deseja atualizar: ").strip()
+    encontrado = False
+    
+    for user in cadastros:
+        if user['cpf'] == cpf_busca:
+            encontrado = True
+            print(f"\nUsuário encontrado: {user['nome']}")
+            print("Deixe o campo em branco se não quiser alterar a informação.")
+            
+            novo_nome = input(f"Novo Nome [{user['nome']}]: ").strip()
+            novo_email = input(f"Novo E-mail [{user['email']}]: ").strip()
+            novo_usuario = input(f"Novo Usuário [{user['usuario']}]: ").strip()
+            
+            # Atualiza se o usuário digitou algo
+            if novo_nome:
+                user['nome'] = novo_nome
+            if novo_email:
+                user['email'] = novo_email
+            if novo_usuario:
+                user['usuario'] = novo_usuario
                 
-                # Atualiza a pergunta
-                nova_pergunta = input("Digite a pergunta corrigida (ou Enter para manter a atual): ").strip()
-                if nova_pergunta:
-                    item["pergunta"] = nova_pergunta
-                
-                # Pergunta se deseja alterar o tema também
-                alterar_tema = input("Deseja alterar o tema? (s/n): ").strip().lower()
-                if alterar_tema == 's':
-                    item["tema"] = escolher_tema()
-                
-                print("\n[Sucesso] Registro atualizado com sucesso!")
-                return
+            print("\n[SUCESSO] Cadastro atualizado com sucesso!")
+            break
+    
+    if not encontrado:
+        print("\n[ERRO] Nenhum cadastro encontrado com este CPF.")
         
-        print(f"[Aviso] Nenhum registro encontrado com o ID #{id_busca}.")
-        
-    except ValueError:
-        print("[Erro] O ID deve ser um número inteiro.")
-
-
 # ---------------------------------------------------------
 # 4. DELETE (Deletar informação)
 # ---------------------------------------------------------
