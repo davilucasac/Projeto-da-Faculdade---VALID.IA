@@ -6,13 +6,13 @@ def criar_cadastro(cadastros):
     usuario = input("Digite o NOME DE USUÁRIO: ").strip()
     cpf = input("Digite o CPF (apenas números): ").strip()
     
-    # Validação utilizando 'for' para verificar se o CPF já existe
+    
     for item in cadastros:
         if item['cpf'] == cpf:
             print("\n[ERRO] Já existe um cadastro com este CPF!")
             return
             
-    # Dicionário com as informações do usuário
+    
     novo_usuario = {
         'cpf': cpf,
         'nome': nome,
@@ -69,4 +69,32 @@ def atualizar_cadastro(cadastros):
             break
     
     if not encontrado:
+        print("\n[ERRO] Nenhum cadastro encontrado com este CPF.")
+        def deletar_cadastro(cadastros):
+    """Função para remover um cadastro (DELETE)"""
+    print("\n--- DELETAR CADASTRO ---")
+    if not cadastros:
+        print("Nenhum cadastro disponível para deletar.")
+        return
+        
+    cpf_busca = input("Digite o CPF do usuário que deseja deletar: ").strip()
+    removido = False
+    
+    for i, user in enumerate(cadastros):
+        if user['cpf'] == cpf_busca:
+            
+            opcoes_confirmacao = ('s', 'sim', 'y')
+            
+            confirmacao = input(f"Tem certeza que deseja excluir '{user['nome']}'? (s/n): ").lower().strip()
+            
+            if confirmacao in opcoes_confirmacao:
+                cadastros.pop(i)
+                print("\n[SUCESSO] Cadastro removido com sucesso!")
+            else:
+                print("\n[CANCELADO] A operação de exclusão foi cancelada.")
+                
+            removido = True
+            break
+    
+    if not removido:
         print("\n[ERRO] Nenhum cadastro encontrado com este CPF.")
