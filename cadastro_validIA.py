@@ -98,3 +98,36 @@ def atualizar_cadastro(cadastros):
     
     if not removido:
         print("\n[ERRO] Nenhum cadastro encontrado com este CPF.")
+
+def main():
+    """Função principal que gerencia o menu e o loop do sistema"""
+    cadastros = []
+    
+    while True:
+        print("\n" + "=" * 40)
+        print("        SISTEMA DE CADASTRO - CRUD")
+        print("=" * 40)
+        print("[1] Criar novo cadastro")
+        print("[2] Listar cadastros (Read)")
+        print("[3] Atualizar cadastro")
+        print("[4] Deletar cadastro")
+        print("[5] Sair")
+        
+        opcao = input("\nEscolha uma opção: ").strip()
+        
+        if opcao == '1':
+            criar_cadastro(cadastros)
+        elif opcao == '2':
+            listar_cadastros(cadastros)
+        elif opcao == '3':
+            atualizar_cadastro(cadastros)
+        elif opcao == '4':
+            deletar_cadastro(cadastros)
+        elif opcao == '5':
+            print("\nSaindo do sistema. Até logo!")
+            break
+        else:
+            print("\n[ERRO] Opção inválida! Escolha um número entre 1 e 5.")
+
+if __name__ == "__main__":
+    main()
