@@ -1,3 +1,6 @@
+import json  
+import os    
+
 def criar_cadastro(cadastros):
     """Função para criar um novo cadastro (CREATE)"""
     print("\n--- NOVO CADASTRO ---")
@@ -112,7 +115,9 @@ def main():
         print("[2] Listar cadastros (Read)")
         print("[3] Atualizar cadastro")
         print("[4] Deletar cadastro")
-        print("[5] Sair")
+        print("[5] Salvar cadastros em arquivo JSON") 
+        print("[6] Carregar cadastros de arquivo JSON")
+        print("[7] Sair")
         
         opcao = input("\nEscolha uma opção: ").strip()
         
@@ -124,11 +129,40 @@ def main():
             atualizar_cadastro(cadastros)
         elif opcao == '4':
             deletar_cadastro(cadastros)
-        elif opcao == '5':
+        elif opcao == '5':  
+            salvar_cadastros(cadastros)
+        elif opcao == '6':  
+            cadastros = carregar_cadastros()
+        elif opcao == '7':
             print("\nSaindo do sistema. Até logo!")
             break
         else:
-            print("\n[ERRO] Opção inválida! Escolha um número entre 1 e 5.")
+            print("\n[ERRO] Opção inválida! Escolha um número entre 1 e 7.")
+
+ARQUIVO_JSON = "cadastros.json" 
+
+def carregar_cadastros():
+    """Lê o arquivo JSON e devolve a lista de cadastros (lista vazia se não existir)."""
+    if not os.path.exists(ARQUIVO_JSON):
+        print("\n[AVISO] Nenhum arquivo salvo foi encontrado. Salve primeiro (opção 5).")
+        return []
+    try:
+        with open(ARQUIVO_JSON, "r", encoding="utf-8") as arquivo:
+            dados = json.load(arquivo)
+        print(f"\n[SUCESSO] {len(dados)} cadastro(s) carregado(s) de '{ARQUIVO_JSON}'!")
+        return dados
+    except (json.JSONDecodeError, OSError):
+        print("\n[AVISO] Não foi possível ler o arquivo. Iniciando com lista vazia.")
+        return []
+
+def salvar_cadastros(cadastros):
+    """Grava a lista de cadastros no arquivo JSON."""
+    try:
+        with open(ARQUIVO_JSON, "w", encoding="utf-8") as arquivo:
+            json.dump(cadastros, arquivo, ensure_ascii=False, indent=4)
+        print(f"\n[SUCESSO] {len(cadastros)} cadastro(s) salvo(s) em '{ARQUIVO_JSON}'!")
+    except OSError:
+        print("\n[ERRO] Não foi possível salvar o arquivo.")
 
 if __name__ == "__main__":
     main()
