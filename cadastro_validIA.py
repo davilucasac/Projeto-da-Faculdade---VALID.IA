@@ -21,5 +21,20 @@ def criar_cadastro(cadastros):
     }
     cadastros.append(novo_usuario)
     print(f"\n[SUCESSO] Usuário '{usuario}' cadastrado com sucesso!")
+
+def listar_cadastros(cadastros):
+    """Função para listar todos os cadastros (READ)"""
+    print("\n--- LISTA DE CADASTROS ---")
+    if not cadastros:
+        print("Nenhum cadastro encontrado.")
+    else:
+        for indice, user in enumerate(cadastros):
+            print("-" * 30)
+            print(f"ID / Posição: {indice}")
+            print(f"Nome    : {user['nome']}")
+            print(f"E-mail  : {user['email']}")
+            print(f"Usuário : {user['usuario']}")
+            print(f"CPF     : {user['cpf']}")
+        print("-" * 30)
     
     
