@@ -38,3 +38,36 @@ def listar_cadastros(cadastros):
         print("-" * 30)
     
     
+def atualizar_cadastro(cadastros):
+    """Função para atualizar um cadastro existente (UPDATE)"""
+    print("\n--- ATUALIZAR CADASTRO ---")
+    if not cadastros:
+        print("Nenhum cadastro disponível para atualizar.")
+        return
+        
+    cpf_busca = input("Digite o CPF do usuário que deseja atualizar: ").strip()
+    encontrado = False
+    
+    for user in cadastros:
+        if user['cpf'] == cpf_busca:
+            encontrado = True
+            print(f"\nUsuário encontrado: {user['nome']}")
+            print("Deixe o campo em branco se não quiser alterar a informação.")
+            
+            novo_nome = input(f"Novo Nome [{user['nome']}]: ").strip()
+            novo_email = input(f"Novo E-mail [{user['email']}]: ").strip()
+            novo_usuario = input(f"Novo Usuário [{user['usuario']}]: ").strip()
+            
+            # Atualiza se o usuário digitou algo
+            if novo_nome:
+                user['nome'] = novo_nome
+            if novo_email:
+                user['email'] = novo_email
+            if novo_usuario:
+                user['usuario'] = novo_usuario
+                
+            print("\n[SUCESSO] Cadastro atualizado com sucesso!")
+            break
+    
+    if not encontrado:
+        print("\n[ERRO] Nenhum cadastro encontrado com este CPF.")
