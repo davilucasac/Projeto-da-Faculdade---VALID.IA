@@ -58,7 +58,6 @@ def atualizar_cadastro(cadastros):
             novo_email = input(f"Novo E-mail [{user['email']}]: ").strip()
             novo_usuario = input(f"Novo Usuário [{user['usuario']}]: ").strip()
             
-            # Atualiza se o usuário digitou algo
             if novo_nome:
                 user['nome'] = novo_nome
             if novo_email:
