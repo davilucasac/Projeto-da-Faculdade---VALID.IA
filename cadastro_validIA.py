@@ -70,7 +70,8 @@ def atualizar_cadastro(cadastros):
     
     if not encontrado:
         print("\n[ERRO] Nenhum cadastro encontrado com este CPF.")
-        def deletar_cadastro(cadastros):
+
+def deletar_cadastro(cadastros):
     """Função para remover um cadastro (DELETE)"""
     print("\n--- DELETAR CADASTRO ---")
     if not cadastros:
@@ -82,7 +83,7 @@ def atualizar_cadastro(cadastros):
     
     for i, user in enumerate(cadastros):
         if user['cpf'] == cpf_busca:
-            
+            # Tupla contendo opções válidas de confirmação
             opcoes_confirmacao = ('s', 'sim', 'y')
             
             confirmacao = input(f"Tem certeza que deseja excluir '{user['nome']}'? (s/n): ").lower().strip()
